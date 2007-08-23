@@ -1,6 +1,6 @@
 %define name	barcode
 %define version	0.98
-%define release	%mkrel 6
+%define release	%mkrel 7
 
 %define lib_name_orig %mklibname barcode
 %define lib_major 0
