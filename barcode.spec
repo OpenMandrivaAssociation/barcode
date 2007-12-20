@@ -14,6 +14,7 @@ Release:	%{release}
 License:	GPL
 Group:		Publishing
 Source:		ftp://ar.linux.it/pub/barcode/%name-%{version}.tar.bz2
+BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 URL:		http://gnu.systemy.it/software/barcode
 
 %description
