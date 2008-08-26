@@ -1,17 +1,16 @@
 %define name	barcode
 %define version	0.98
-%define release	%mkrel 9
+%define release	%mkrel 10
 
-%define lib_name_orig %mklibname barcode
-%define lib_major 0
-%define lib_name %lib_name_orig%lib_major
-
+%define major 0
+%define libname %mklibname barcode %{major}
+%define develname %mklibname barcode -d
 
 Summary:	GNU barcode
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-License:	GPL
+License:	GPLv2+
 Group:		Publishing
 Source:		ftp://ar.linux.it/pub/barcode/%name-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
@@ -25,13 +24,13 @@ product tagging standards: UPC-A, UPC-E, EAN-13, EAN-8, ISBN, as well
 as a few other formats. Ouput is generated as either Postscript or
 Encapsulated Postscript (other back-ends may be added if needed).
 
-%package -n %lib_name-devel
+%package -n %{develname}
 Summary:	GNU barcode files for development
 Group:		Development/Other
-Obsoletes:	barcode-devel <= 0.98-4mdk
-Provides:	barcode-devel
+Obsoletes:	%{libname}-devel
+Provides:	%{name}-devel
 
-%description -n %lib_name-devel
+%description -n %{develname}
 This is GNU-barcode.
 The package is meant to solve most needs in barcode creation with a
 conventional printer. It can create printouts for the conventional
@@ -54,12 +53,12 @@ export -n LANG LINGUAS LC_ALL
 %make
 
 %install
-[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
-make prefix=$RPM_BUILD_ROOT%{_prefix} \
-    LIBDIR=$RPM_BUILD_ROOT%{_libdir} \
-    MAN1DIR=$RPM_BUILD_ROOT%{_mandir}/man1 \
-    MAN3DIR=$RPM_BUILD_ROOT%{_mandir}/man3 \
-    INFODIR=$RPM_BUILD_ROOT%{_infodir} install
+[ -n "%{buildroot}" -a "%{buildroot}" != / ] && rm -rf %{buildroot}
+make prefix=%{buildroot}%{_prefix} \
+    LIBDIR=%{buildroot}%{_libdir} \
+    MAN1DIR=%{buildroot}%{_mandir}/man1 \
+    MAN3DIR=%{buildroot}%{_mandir}/man3 \
+    INFODIR=%{buildroot}%{_infodir} install
 
 
 %post
@@ -70,7 +69,7 @@ if [ "$1" = "0" ]; then if [[ -f %{_infodir}/%{name}.info.bz2 ]];then /sbin/inst
 
 
 %clean
-[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+[ -n "%{buildroot}" -a "%{buildroot}" != / ] && rm -rf %{buildroot}
 
 %files
 %defattr(-, root, root)
@@ -79,7 +78,7 @@ if [ "$1" = "0" ]; then if [[ -f %{_infodir}/%{name}.info.bz2 ]];then /sbin/inst
 %{_datadir}/info/*
 %{_mandir}/man1/*
 
-%files -n %lib_name-devel
+%files -n %{develname}
 %defattr(-, root, root)
 %{_includedir}/barcode.h
 %{_libdir}/libbarcode.a
