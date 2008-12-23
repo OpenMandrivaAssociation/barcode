@@ -13,6 +13,8 @@ Release:	%{release}
 License:	GPLv2+
 Group:		Publishing
 Source:		ftp://ar.linux.it/pub/barcode/%name-%{version}.tar.bz2
+Patch0:		barcode-0.98-fix-str-fmt.patch
+Patch1:		barcode-0.98-fix-installation.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 URL:		http://gnu.systemy.it/software/barcode
 
@@ -41,35 +43,27 @@ Encapsulated Postscript (other back-ends may be added if needed).
 This package contain the C header, the static library and man page
 for development.
 
-
 %prep
 %setup -q
-
+%patch0 -p1
+%patch1 -p0
 
 %build
-export -n LANG LINGUAS LC_ALL 
-%configure
-export -n LANG LINGUAS LC_ALL 
+%configure2_5x
 %make
 
 %install
 [ -n "%{buildroot}" -a "%{buildroot}" != / ] && rm -rf %{buildroot}
-make prefix=%{buildroot}%{_prefix} \
-    LIBDIR=%{buildroot}%{_libdir} \
-    MAN1DIR=%{buildroot}%{_mandir}/man1 \
-    MAN3DIR=%{buildroot}%{_mandir}/man3 \
-    INFODIR=%{buildroot}%{_infodir} install
-
-
-%post
-if [[ -f %{_infodir}/%{name}.info.bz2 ]];then /sbin/install-info %{_infodir}/%{name}.info.bz2 --dir=%{_infodir}/dir;fi
-
-%postun
-if [ "$1" = "0" ]; then if [[ -f %{_infodir}/%{name}.info.bz2 ]];then /sbin/install-info %{_infodir}/%{name}.info.bz2 --dir=%{_infodir}/dir --remove ;fi; fi
-
+%makeinstall_std
 
 %clean
 [ -n "%{buildroot}" -a "%{buildroot}" != / ] && rm -rf %{buildroot}
+
+%post
+%_install_info %name
+
+%postun
+%_remove_install_info %name
 
 %files
 %defattr(-, root, root)
@@ -83,4 +77,3 @@ if [ "$1" = "0" ]; then if [[ -f %{_infodir}/%{name}.info.bz2 ]];then /sbin/inst
 %{_includedir}/barcode.h
 %{_libdir}/libbarcode.a
 %{_mandir}/man3/*
-
