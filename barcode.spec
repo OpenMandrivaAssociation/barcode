@@ -1,18 +1,14 @@
-%define name	barcode
-%define version	0.98
-%define release	%mkrel 12
-
 %define major 0
-%define libname %mklibname barcode %{major}
+%define libname	  %mklibname barcode %{major}
 %define develname %mklibname barcode -d
 
 Summary:	GNU barcode
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		barcode
+Version:	0.98
+Release:	%mkrel 13
 License:	GPLv2+
 Group:		Publishing
-Source:		ftp://ar.linux.it/pub/barcode/%name-%{version}.tar.bz2
+Source:		ftp://ftp.gnu.org/gnu/barcode/%name-%{version}.tar.bz2
 Patch0:		barcode-0.98-fix-str-fmt.patch
 Patch1:		barcode-0.98-fix-installation.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
@@ -53,11 +49,11 @@ for development.
 %make
 
 %install
-[ -n "%{buildroot}" -a "%{buildroot}" != / ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 %makeinstall_std
 
 %clean
-[ -n "%{buildroot}" -a "%{buildroot}" != / ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %post
 %_install_info %name
