@@ -5,7 +5,7 @@
 Summary:	GNU barcode
 Name:		barcode
 Version:	0.98
-Release:	%mkrel 13
+Release:	%mkrel 14
 License:	GPLv2+
 Group:		Publishing
 Source:		ftp://ftp.gnu.org/gnu/barcode/%name-%{version}.tar.bz2
