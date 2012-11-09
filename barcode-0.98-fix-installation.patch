@@ -1,0 +1,58 @@
+--- Makefile.in~	2001-10-17 15:26:21.000000000 +0200
++++ Makefile.in	2008-12-23 05:43:37.000000000 +0100
+@@ -10,13 +10,14 @@
+ 
+ LDFLAGS = -L. -l$(TARGET) @LIBPAPER@
+ 
++DESTDIR = /
+ prefix = @prefix@
+ BINDIR = $(prefix)/bin
+-LIBDIR = $(prefix)/lib
++LIBDIR = @libdir@
+ INCDIR = $(prefix)/include
+-MAN1DIR = $(prefix)/man/man1
+-MAN3DIR = $(prefix)/man/man3
+-INFODIR = $(prefix)/info
++MAN1DIR = @mandir@/man1
++MAN3DIR = @mandir@/man3
++INFODIR = @datadir@/info
+ 
+ # getopt may be installed or not, if not take our copy
+ GETOPT_O = @GETOPT_O@
+@@ -63,22 +64,22 @@
+ 	cd doc && $(MAKE) 
+ 
+ install:
+-	$(INSTALL) -d $(BINDIR) $(INCDIR) $(LIBDIR) $(MAN1DIR) \
+-		$(MAN3DIR) $(INFODIR)
+-	$(INSTALL) -c $(TARGET) $(BINDIR)
+-	$(INSTALL) -c -m 0644 $(HEADER) $(INCDIR)
+-	$(INSTALL) -c -m 0644  $(LIBRARY) $(LIBDIR)
+-	$(INSTALL) -c -m 0644  $(MAN1) $(MAN1DIR)
+-	$(INSTALL) -c -m 0644  $(MAN3) $(MAN3DIR)
+-	$(INSTALL) -c -m 0644  $(INFO) $(INFODIR)
++	$(INSTALL) -d $(DESTDIR)/$(BINDIR) $(DESTDIR)/$(INCDIR) $(DESTDIR)/$(LIBDIR) $(DESTDIR)/$(MAN1DIR) \
++		$(DESTDIR)/$(MAN3DIR) $(DESTDIR)/$(INFODIR)
++	$(INSTALL) -c $(TARGET) $(DESTDIR)/$(BINDIR)
++	$(INSTALL) -c -m 0644 $(HEADER) $(DESTDIR)/$(INCDIR)
++	$(INSTALL) -c -m 0644  $(LIBRARY) $(DESTDIR)/$(LIBDIR)
++	$(INSTALL) -c -m 0644  $(MAN1) $(DESTDIR)/$(MAN1DIR)
++	$(INSTALL) -c -m 0644  $(MAN3) $(DESTDIR)/$(MAN3DIR)
++	$(INSTALL) -c -m 0644  $(INFO) $(DESTDIR)/$(INFODIR)
+ 
+ uninstall:
+-	$(RM) -f $(BINDIR)/$(TARGET)
+-	$(RM) -f $(INCDIR)/$(HEADER)
+-	$(RM) -f $(LIBDIR)/$(LIBRARY)
+-	$(RM) -f $(MAN1DIR)/$(MAN1)
+-	$(RM) -f $(MAN3DIR)/$(MAN3)
+-	$(RM) -f $(INDODIR)/$(INFO)
++	$(RM) -f $(DESTDIR)/$(BINDIR)/$(TARGET)
++	$(RM) -f $(DESTDIR)/$(INCDIR)/$(HEADER)
++	$(RM) -f $(DESTDIR)/$(LIBDIR)/$(LIBRARY)
++	$(RM) -f $(DESTDIR)/$(MAN1DIR)/$(MAN1)
++	$(RM) -f $(DESTDIR)/$(MAN3DIR)/$(MAN3)
++	$(RM) -f $(DESTDIR)/$(INDODIR)/$(INFO)
+ 
+ #Make clean keeps the compiled documents
+ clean:

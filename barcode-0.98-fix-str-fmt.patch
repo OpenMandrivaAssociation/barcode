@@ -1,0 +1,11 @@
+--- barcode-0.98/plessey.c.str	2008-12-23 05:30:01.000000000 +0100
++++ barcode-0.98/plessey.c	2008-12-23 05:30:13.000000000 +0100
+@@ -148,7 +148,7 @@
+                         checkptr[i+j] ^= check[j];
+     }
+     for (i = 0; i < 8; i++) {
+-        sprintf(ptr, patterns[checkptr[strlen(text) * 4 + i]]);
++        sprintf(ptr, "%s", patterns[checkptr[strlen(text) * 4 + i]]);
+ 	ptr += 2;
+     }
+     fprintf(stderr, "CRC: ");
