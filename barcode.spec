@@ -5,13 +5,12 @@
 Summary:	GNU barcode
 Name:		barcode
 Version:	0.98
-Release:	%mkrel 14
+Release:	15
 License:	GPLv2+
 Group:		Publishing
 Source:		ftp://ftp.gnu.org/gnu/barcode/%name-%{version}.tar.bz2
 Patch0:		barcode-0.98-fix-str-fmt.patch
 Patch1:		barcode-0.98-fix-installation.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 URL:		http://gnu.systemy.it/software/barcode
 
 %description
@@ -49,17 +48,7 @@ for development.
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
-
-%clean
-rm -rf %{buildroot}
-
-%post
-%_install_info %name
-
-%postun
-%_remove_install_info %name
 
 %files
 %defattr(-, root, root)
