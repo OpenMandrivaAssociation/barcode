@@ -1,2 +1,4 @@
+removed_sources:
+  barcode-0.98.tar.bz2: d0d8d8aad5c31dd60bd3ff607a9d24da8ebd6156
 sources:
-  "barcode-0.98.tar.bz2": d0d8d8aad5c31dd60bd3ff607a9d24da8ebd6156
+  barcode-0.99.tar.xz: a6283a844ebfdccc9458256e5e6db15760348384
