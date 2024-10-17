@@ -6,7 +6,7 @@ License:	GPLv2+
 Group:		Publishing
 Source:		ftp://ftp.gnu.org/gnu/barcode/%name-%{version}.tar.xz
 Patch0:		barcode-0.98-fix-str-fmt.patch
-URL:		http://gnu.systemy.it/software/barcode
+URL:		https://gnu.systemy.it/software/barcode
 
 %description
 This is GNU-barcode.
