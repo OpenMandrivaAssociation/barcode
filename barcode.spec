@@ -8,6 +8,11 @@ Source:		ftp://ftp.gnu.org/gnu/barcode/%name-%{version}.tar.xz
 Patch0:		barcode-0.98-fix-str-fmt.patch
 URL:		https://gnu.systemy.it/software/barcode
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 %description
 This is GNU-barcode.
 The package is meant to solve most needs in barcode creation with a
